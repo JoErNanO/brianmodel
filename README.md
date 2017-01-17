@@ -34,7 +34,7 @@ The template neurons and their currents are defined as [YAML](http://www.yaml.or
     ~/brianmodel/brianmodel/
 
 # Sample Usage
-## Model Parameter File
+## Model Parameter File Structure
 Your model neuron is defined as a list of currents and their parameters.
 You will have to create a YAML parameter file containing all the neuron models used in your simulations.
 The sample file below (which can be found in includes/) defines two model neurons -- pyramidal and fast-spiking inhibitory -- and their associated currents and parameters.
@@ -59,15 +59,18 @@ neurons:
                   g: "5 * msiemens * cm ** -2"
                   E: "-100 * mV"
                   vT: "-55 * mV"
-
-
 ```
 
 Here, "model1" is the identifier of the model neuron, and "defined" contains the list of ionic currents.
 The neuron of type "model1" contains a leak current and a sodium current.
 Each individual entry in the current list contains the name of the current class to be instantiated, the name used to identify the current in the [BRIAN](http://briansimulator.org/) script, and the parameters of that current equation (the conductance "g", the reversal potential "E", and the Traub constant, in the case of "IonicCurrentHHTraubK").
 
+## Existing Currents and Parameters
 
+
+## Defining and Including Currents
+Current entries can either be defined or included from existing YAML files.
+Below is a model parameter file containing both defined and included currents.
 
 ```yaml
 neurons:
@@ -153,7 +156,8 @@ import brianmodel as bm
 2. Read the neuron model parameters file and create the string-formatted model equations from it:
 ```python
 # Read parameters from file
-mod = bm.BrianModel(args.params)
+filename = "./params.yml"
+mod = bm.BrianModel(filename)
 mod.readParameterFile()
 modeq = mod.getModelString()
 ```
