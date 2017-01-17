@@ -1,2 +1,2 @@
 # brianmodel
-Plugin library for the brian simulator.
+Library of neuron and ionic currents for the Brian simulator.
