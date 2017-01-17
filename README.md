@@ -66,25 +66,35 @@ Here, "model1" is the identifier of the model neuron, and "defined" contains the
 The neuron of type "model1" contains a leak current and a sodium current.
 Each individual entry in the current list contains the name of the current class to be instantiated, the name used to identify the current in the [BRIAN](http://briansimulator.org/) script, and the parameters of that current equation (the conductance "g", the reversal potential "E", and the Traub constant "vT", in the case of "IonicCurrentHHTraubK").
 
-## Existing Currents and Parameters
+## Existing Currents and their Parameters
 This library is shipped with existing current implementations and sample parameter files.
 These can be found in the includes/ directory.
 The table below summarises the existing ionic current implementations and their parameters used in the YAML files.
 
-|          Current         |        Class Name        |                Parameters                |
-|:------------------------:|:------------------------:|:----------------------------------------:|
-| Traub Leak               | IonicCurrentHHTraubLeak  | g, E, vT                                 |
-| Traub Potassium          | IonicCurrentHHTraubK     | g, E, vT                                 |
-| Traub Sodium             | IonicCurrentHHTraubNa    | g, E, vT                                 |
-| M                        | IonicCurrentMYamada      | g, E, tau                                |
-| Calcium (Low-threshold)  | IonicCurrentCaLReuveni   | g, E, tau, caInf, kUnit, kFaraday, depth |
-| Calcium (High-threshold) | IonicCurrentCaTHuguenard | g, E, tau, caInf, kUnit, kFaraday, depth |
-| CAN                      | IonicCurrentCANDestexhe  | g, E, beta, cac, temp                    |
-| Wang Leak                | IonicCurrentHHWangLeak   | g, E                                     |
-| Wang Sodium              | IonicCurrentHHWangNa     | g, E                                     |
-| Wang Potassium           | IonicCurrentHHWangK      | g, E                                     |
-| Monoexponential Synapse  | IonicCurrentSynExp       | g, E, tau                                |
+|         Current         |        Class Name        |                Parameters                |
+|:-----------------------:|:------------------------:|:----------------------------------------:|
+| Traub Leak              | IonicCurrentHHTraubLeak  | g, E, vT                                 |
+| Traub Potassium         | IonicCurrentHHTraubK     | g, E, vT                                 |
+| Traub Sodium            | IonicCurrentHHTraubNa    | g, E, vT                                 |
+| M                       | IonicCurrentMYamada      | g, E, tau                                |
+| Calcium (L-type)        | IonicCurrentCaLReuveni   | g, E, tau, caInf, kUnit, kFaraday, depth |
+| Calcium (T-Type)        | IonicCurrentCaTHuguenard | g, E, tau, caInf, kUnit, kFaraday, depth |
+| CAN                     | IonicCurrentCANDestexhe  | g, E, beta, cac, temp                    |
+| Wang Leak               | IonicCurrentHHWangLeak   | g, E                                     |
+| Wang Sodium             | IonicCurrentHHWangNa     | g, E                                     |
+| Wang Potassium          | IonicCurrentHHWangK      | g, E                                     |
+| Monoexponential Synapse | IonicCurrentSynExp       | g, E, tau                                |
 
+## Existing Neuron Templates
+This library is shipped with existing neuron templates.
+The table below summarises the template neuron and the associated parameter file.
+
+| Neuron                                                   | Parameter File               |
+|----------------------------------------------------------|------------------------------|
+| Excitatory Hodgkin-Huxley (Traub)                        | paramsHHTraubPyr.yml         |
+| Persistent Firing Excitatory Hodgkin Huxley (Giovannini) | paramsHHPersistentFiring.yml |
+| Inhibitory Hodgking-Huxley (Wang)                        | paramsHHInhibHippocampus.yml |
+| Inhibitory Hodgking-Huxley (Kopell)                      | paramsHHKopellInh.yml        |
 
 ## Defining and Including Currents
 Current entries can either be defined or included from existing YAML files.
