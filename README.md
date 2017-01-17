@@ -16,7 +16,7 @@ Implemented ionic current libraries include:
 - Traub and Miles Hodgkin-Huxley (I<sub>Leak</sub>, I<sub>K</sub>, I<sub>Na</sub>) implementation [1]
 - M-Current (I<sub>M</sub>) implementation described in [2]
 - Calcium current (I<sub>L</sub>) implementation by Reuveni et al. [3]
-- Calcium pump mechanisms ($\frac{\mathrm{d}Ca}{\mathrm{d}t}$) implementation by Destexhe et al. [4]
+- Calcium pump mechanisms (dCa/dt) implementation by Destexhe et al. [4]
 - Calcium current (I<sub>T</sub>) implementation by Huguenard et al. [5]
 - Calcium-activated non-selective current (I<sub>CAN</sub>) implementation by Destexhe et al. [4]
 - Wang and Buszáki inhibitory Hodgkin-Huxley (I<sub>Leak</sub>, I<sub>K</sub>, I<sub>Na</sub>) implementation [6]
