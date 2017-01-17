@@ -1,2 +1,119 @@
-# brianmodel
-Library of neuron and ionic currents for the Brian simulator.
+# BrianModel
+Library of neuron models and ionic currents for the BRIAN simulator.
+The purpose of these is to speed up simulation set-up time and reduce code duplication across simulation scripts.
+
+## Spiking Neuron Templates
+Template neurons are defined by the ionic currents that flow through their membrane.
+Implemented templates include:
+    
+- Hodgkin-Huxley pyramidal neuron (leak, sodium and potassium)
+- Hodgkin-Huxley pyramidal neuron with CAN receptors (leak, sodium, potassium, m-current, calcium, CAN)
+- Hodgkin-Huxley fast-spiking inhibitory hippocampal (leak, sodium, potassium, m-current)
+
+### Ionic Currents
+Implemented ionic current libraries include:
+
+\- Traub and Miles Hodgkin-Huxley ($I_{Leak}, I_{K}, I_{Na}$) implementation \cite{Traub1991}
+ M-Current ($I_M$) implementation described in \cite{Yamada1989}
+- Calcium current ($I_L$) implementation by Reuveni et al. \cite{Reuveni1993}
+- Calcium pump mechanisms ($\frac{\mathrm{d}Ca}{\mathrm{d}t}$) implementation by Reuveni et al. \cite{Reuveni1993}
+- Calcium-activated non-selective current ($I_{CAN}$) implementation by Destexhe et al. \cite{Destexhe1994}
+- Wang and Busz\'{a}ki inhibitory Hodgkin-Huxley ($I_{Leak}, I_{K}, I_{Na}$) implementation \cite{Wang1996}
+
+The current library is easily extensible by third-party users due to its hierarchical design.
+The template neurons and their currents are defined as YAML\footnote{\url{http://www.yaml.org/}} files, which are conveniently parsed by a Python library developed by Francesco Giovannini which acts as an interface to the BRIAN simulator API's.
+
+# Installation
+1. Download the repository as it is in your home directory
+    ~/brianmodel
+
+2. Create a file called *brianmodel.pth* in your python path (the path is located somewhere in local/lib/python2.7/site-packages/, be it global (/usr/) or locally depending on your configuration)
+
+3. Include the library by copying the path to brianmodel in the created .pth file as follows:
+    ~/brianmodel/brianmodel/
+
+# Sample Usage
+## Model Parameter File
+Your model neuron is defined as a list of currents and their parameters.
+You will have to create a YAML parameter file containing all the neuron models used in your simulations.
+The sample file below defines two model neurons -- pyramidal and fast-spiking inhibitory -- and their associated currents and parameters:
+
+    # ******************************************************************************* ##
+    # Model parameters for two interconnected neural populations.
+    #
+    #   1. A population of CAN-equipped pyramidal neurons with the following currents:
+    #       leak, Na, K, M, CaL, CAN, SynE, SynI
+    #   2. A population of inhibitory interneurons with the following currents:
+    #       leak, Na, K, SynE, SynI
+    #
+    # :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
+    # :licence GPLv3, see LICENCE for more details
+    #
+
+    neurons:
+        pyramidal:
+            area: "29e3 * umetre ** 2"
+            conductance: "1 * ufarad * cm ** -2"
+
+            currents:
+                included: [paramsSynExpExc.yml, paramsSynExpInh.yml]
+
+                defined:
+                    - class: "IonicCurrentHHTraubLeak"
+                      name: "I_leak"
+                      g: "1e-5 * siemens * cm ** -2"
+                      E: "-70 * mV"
+
+                    - class: "IonicCurrentHHTraubK"
+                      name: "I_K"
+                      g: "5 * msiemens * cm ** -2"
+                      E: "-100 * mV"
+                      vT: "-55 * mV"
+
+                    - class: "IonicCurrentHHTraubNa"
+                      name: "I_Na"
+                      g: "50 * msiemens * cm ** -2"
+                      E: "50 * mV"
+                      vT: "-55 * mV"
+
+        interneuron:
+            area: "14e3 * umetre ** 2"
+            conductance: "1 * ufarad * cm ** -2"
+
+            currents:
+                included: [paramsSynExpExc.yml, paramsSynExpInh.yml]
+
+                defined:
+                    - class: "IonicCurrentHHWangLeak"
+                      name: "I_leak"
+                      g: "0.1e-3 * siemens * cm ** -2"
+                      E: "-65 * mV"
+
+                    - class: "IonicCurrentHHWangK"
+                      name: "I_K"
+                      g: "9e-3 * siemens * cm ** -2"
+                      E: "-90 * mV"
+
+                    - class: "IonicCurrentHHWangNa"
+                      name: "I_Na"
+                      g: "35e-3 * siemens * cm ** -2"
+                      E: "55 * mV"
+
+    # ******************************************************************************* ##
+
+## Simulation Script
+1. Import the library in your python BRIAN simulation script:
+    import brianmodel as bm
+
+2. Read the neuron model parameters file and create the string-formatted model equations from it:
+    # Read parameters from file
+    mod = bm.BrianModel(args.params)
+    mod.readParameterFile()
+    modeq = mod.getModelString()
+
+3. This creates a dictionary of string-formatted model equations which you can access by key as standard in Pythong.
+
+4. You can now pass the equations to the BRIAN Simulator. The command below creates a population of 100 neurons defined by the model strings contained in the list identified by "pyramidal"
+    eqPyram = Equations(modeq['pyramidal'])
+    Pyr = NeuronGroup(100, model=eqPyram, threshold=EmpiricalThreshold(threshold= -20 * mV, refractory=3 * ms), implicit=True, freeze=True)
+    
