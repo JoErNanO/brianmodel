@@ -16,10 +16,11 @@ Implemented ionic current libraries include:
 - Traub and Miles Hodgkin-Huxley (I<sub>Leak</sub>, I<sub>K</sub>, I<sub>Na</sub>) implementation [1]
 - M-Current (I<sub>M</sub>) implementation described in [2]
 - Calcium current (I<sub>L</sub>) implementation by Reuveni et al. [3]
-- Calcium pump mechanisms ($\frac{\mathrm{d}Ca}{\mathrm{d}t}$) implementation by Reuveni et al. [4]
+- Calcium pump mechanisms ($\frac{\mathrm{d}Ca}{\mathrm{d}t}$) implementation by Destexhe et al. [4]
+- Calcium current (I<sub>T</sub>) implementation by Huguenard et al. [5]
 - Calcium-activated non-selective current (I<sub>CAN</sub>) implementation by Destexhe et al. [4]
-- Wang and Buszáki inhibitory Hodgkin-Huxley (I<sub>Leak</sub>, I<sub>K</sub>, I<sub>Na</sub>) implementation [5]
-- Kopell inhibitory Hodgkin-Huxley (I<sub>Leak</sub>, I<sub>K</sub>, I<sub>Na</sub>) implementation [6]
+- Wang and Buszáki inhibitory Hodgkin-Huxley (I<sub>Leak</sub>, I<sub>K</sub>, I<sub>Na</sub>) implementation [6]
+- Kopell inhibitory Hodgkin-Huxley (I<sub>Leak</sub>, I<sub>K</sub>, I<sub>Na</sub>) implementation [7]
 
 The current library is easily extensible by third-party users due to its hierarchical design.
 The template neurons and their currents are defined as [YAML](http://www.yaml.org/) files, which are conveniently parsed by a Python library which acts as an interface to the [BRIAN](http://briansimulator.org/) simulator API's.
@@ -77,6 +78,7 @@ The table below summarises the existing ionic current implementations and their 
 | Traub Sodium            | IonicCurrentHHTraubNa   | g, E, vT                                 |
 | M                       | IonicCurrentMYamada     | g, E, tau                                |
 | Calcium (Low-threshold) | IonicCurrentCaLReuveni  | g, E, tau, caInf, kUnit, kFaraday, depth |
+| Calcium (ow-threshold) | IonicCurrentCaLReuveni  | g, E, tau, caInf, kUnit, kFaraday, depth |
 | CAN                     | IonicCurrentCANDestexhe | g, E, beta, cac, temp                    |
 | Wang Leak               | IonicCurrentHHWangLeak  | g, E                                     |
 | Wang Sodium             | IonicCurrentHHWangNa    | g, E                                     |
@@ -191,6 +193,7 @@ Pyr = NeuronGroup(100, model=eqPyram, threshold=EmpiricalThreshold(threshold= -2
 1. Traub and Miles, Neuronal Networks of the Hippocampus, Cambridge, 1991
 1. Yamada, W. M., Koch, C., & Adams, P. R. (1989). Multiple Channels and Calcium Dynamics. In C. Koch & I. Segev (Eds.), Methods in neuronal modeling (pp. 97–134). MIT Press.
 1. Reuveni I, Friedman A, Amitai Y, Gutnick MJ. Stepwise repolarization from Ca2+ plateaus in neocortical pyramidal cells: evidence for nonhomogeneous distribution of HVA Ca2+ channels in dendrites. Journal of Neuroscience, 1993 Nov, 13(11):4609-21.
+1. Huguenard, J. R., & McCormick, D. A. (1992). Simulation of the Currents Involved in Rhythmic Oscillations in Thalamic Relay Neurons. Journal of Neurophysiology, 68(4). http://jn.physiology.org/content/68/4/1373
 1. Destexhe, A., Babloyantz, A., and Sejnowski, T. J. (1993). Ionic mechanisms for intrinsic slow oscillations in thalamic relay neurons. Biophysical journal, 65(4):1538{52.
 1. Wang X-J, Buzsáki G: Gamma oscillation by synaptic inhibition in a hippocampal interneuronal network model. J Neurosci 1996, 16:6402–13.
 1. Kopell NJ, Boergers C, Pervouchine D, Malerba P, Tort A: Gamma and theta rhythms in biophysical models of hippocampal circuits. In Hippocampal Microcircuits A Computational Modeler’s Resource Book. Edited by Cutsuridis V, Graham B, Cobb S, Vida I. New York, NY: Springer New York; 2010:423–457.
