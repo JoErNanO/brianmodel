@@ -66,6 +66,10 @@ The neuron of type "model1" contains a leak current and a sodium current.
 Each individual entry in the current list contains the name of the current class to be instantiated, the name used to identify the current in the [BRIAN](http://briansimulator.org/) script, and the parameters of that current equation (the conductance "g", the reversal potential "E", and the Traub constant "vT", in the case of "IonicCurrentHHTraubK").
 
 ## Existing Currents and Parameters
+This library is shipped with existing current implementations and sample parameter files.
+These can be found in the includes/ directory.
+The table below summarises the existing ionic current implementations and their parameters used in the YAML files.
+
 |         Current         |        Class Name       |                Parameters                |
 |:-----------------------:|:-----------------------:|:----------------------------------------:|
 | Traub Leak              | IonicCurrentHHTraubLeak | g, E, vT                                 |
