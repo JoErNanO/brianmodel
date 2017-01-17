@@ -13,12 +13,12 @@ Implemented templates include:
 ### Ionic Currents
 Implemented ionic current libraries include:
 
-- Traub and Miles Hodgkin-Huxley (I_<sub>Leak</sub>, I_<sub>K</sub>, I_<sub>Na</sub>) implementation \cite{Traub1991}
-- M-Current (I_M) implementation described in \cite{Yamada1989}
-- Calcium current (I_<sub>L</sub>) implementation by Reuveni et al. \cite{Reuveni1993}
+- Traub and Miles Hodgkin-Huxley (I<sub>Leak</sub>, I<sub>K</sub>, I<sub>Na</sub>) implementation \cite{Traub1991}
+- M-Current (I<sub>M</sub>) implementation described in \cite{Yamada1989}
+- Calcium current (I<sub>L</sub>) implementation by Reuveni et al. \cite{Reuveni1993}
 - Calcium pump mechanisms ($\frac{\mathrm{d}Ca}{\mathrm{d}t}$) implementation by Reuveni et al. \cite{Reuveni1993}
-- Calcium-activated non-selective current (I_<sub>CAN</sub>) implementation by Destexhe et al. \cite{Destexhe1994}
-- Wang and Buszáki inhibitory Hodgkin-Huxley (I_<sub>Leak</sub>, I_<sub>K</sub>, I_<sub>Na</sub>) implementation \cite{Wang1996}
+- Calcium-activated non-selective current (I<sub>CAN</sub>) implementation by Destexhe et al. \cite{Destexhe1994}
+- Wang and Buszáki inhibitory Hodgkin-Huxley (I<sub>Leak</sub>, I<sub>K</sub>, I<sub>Na</sub>) implementation \cite{Wang1996}
 
 The current library is easily extensible by third-party users due to its hierarchical design.
 The template neurons and their currents are defined as [YAML](http://www.yaml.org/) files, which are conveniently parsed by a Python library which acts as an interface to the [BRIAN](http://briansimulator.org/) simulator API's.
@@ -73,7 +73,7 @@ Each individual entry in the current list contains the name of the current class
 # Model parameters for two interconnected neural populations.
 #
 #   1. A population of CAN-equipped pyramidal neurons with the following currents:
-#       leak, Na, K, M, CaL, CAN, SynE, SynI
+#       leak, Na, K, SynE, SynI
 #   2. A population of inhibitory interneurons with the following currents:
 #       leak, Na, K, SynE, SynI
 #
@@ -191,3 +191,19 @@ Parameter files follow standard [YAML](http://www.yaml.org/) syntax.
     eqPyram = Equations(modeq['pyramidal'])
     Pyr = NeuronGroup(100, model=eqPyram, threshold=EmpiricalThreshold(threshold= -20 * mV, refractory=3 * ms), implicit=True, freeze=True)
     
+
+
+## References
+1. Traub and Miles, Neuronal Networks of the Hippocampus, Cambridge, 1991
+1. Reuveni I, Friedman A, Amitai Y, Gutnick MJ. Stepwise repolarization from Ca2+ plateaus in neocortical pyramidal cells: evidence for nonhomogeneous distribution of HVA Ca2+ channels in dendrites. Journal of Neuroscience, 1993 Nov, 13(11):4609-21.
+1. http://en.wikipedia.org/wiki/L-type_calcium_channel
+1. Kopell NJ, Boergers C, Pervouchine D, Malerba P, Tort A: Gamma and theta rhythms in biophysical models of hippocampal circuits. In Hippocampal Microcircuits A Computational Modeler’s Resource Book. Edited by Cutsuridis V, Graham B, Cobb S, Vida I. New York, NY: Springer New York; 2010:423–457.
+1. L.D. Partridge, D. Swandulla, Calcium-activated non-specific cation channels, Trends in Neurosciences, Volume 11, Issue 2, 1988, Pages 69-72, ISSN 0166-2236, http://dx.doi.org/10.1016/0166-2236(88)90167-1. http://www.sciencedirect.com/science/article/pii/0166223688901671
+1. L.Donald Partridge, Thomas H. Müller, Dieter Swandulla, Calcium-activated non-selective channels in the nervous system, Brain Research Reviews, Volume 19, Issue 3, August 1994, Pages 319-325, ISSN 0165-0173, http://dx.doi.org/10.1016/0165-0173(94)90017-5. (http://www.sciencedirect.com/science/article/pii/0165017394900175
+1. Huguenard, J. R., & McCormick, D. A. (1992). Simulation of the Currents Involved in Rhythmic Oscillations in Thalamic Relay Neurons. Journal of Neurophysiology, 68(4). http://jn.physiology.org/content/68/4/1373
+1. Mccormick, D. A., & Huguenard, J. R. (1992). A Model of the Electrophysiological Properties of Thalamocortical Relay Neurons. Journal of Neurophysiology, 68(4), 1384–1400. http://jn.physiology.org/content/68/4/1384
+1. Wang X-J, Buzsáki G: Gamma oscillation by synaptic inhibition in a hippocampal interneuronal network model. J Neurosci 1996, 16:6402–13.
+1. Kopell NJ, Boergers C, Pervouchine D, Malerba P, Tort A: Gamma and theta rhythms in biophysical models of hippocampal circuits. In Hippocampal Microcircuits A Computational Modeler’s Resource Book. Edited by Cutsuridis V, Graham B, Cobb S, Vida I. New York, NY: Springer New York; 2010:423–457.
+1. Wikipedia, M current, http://en.wikipedia.org/wiki/M_current
+1. McCormick, D.A., Wang, Z. and Huguenard, J. Neurotransmitter control of neocortical neuronal activity and excitability. Cerebral Cortex 3: 387-398, 1993.
+
