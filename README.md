@@ -70,18 +70,6 @@ Each individual entry in the current list contains the name of the current class
 
 
 ```yaml
-# ******************************************************************************* ##
-# Model parameters for two interconnected neural populations.
-#
-#   1. A population of CAN-equipped pyramidal neurons with the following currents:
-#       leak, Na, K, SynE, SynI
-#   2. A population of inhibitory interneurons with the following currents:
-#       leak, Na, K, SynE, SynI
-#
-# :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
-# :licence GPLv3, see LICENCE for more details
-#
-
 neurons:
     pyramidal:
         area: "29e3 * umetre ** 2"
@@ -130,8 +118,6 @@ neurons:
                   name: "I_Na"
                   g: "35e-3 * siemens * cm ** -2"
                   E: "55 * mV"
-
-# ******************************************************************************* ##
 ```
 
 This defines a neuron model called "pyramidal" with its area, conductance and its ionic currents: three defined and two included.
@@ -139,37 +125,19 @@ The defined currents are the leak, sodium and potassium current of the Traub mod
 The included currents are mono-exponential synaptic currents which are defined in separate files (paramsSynExpExc.yml, paramsSynExpInh.yml):
 
 ```yaml
-# ******************************************************************************* ##
-# Model parameters for single exponential excitatory synaptic current.
-#
-#
-# :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
-# :licence GPLv2, see LICENCE for more details
-#
-
 - class: "IonicCurrentSynExp"
   name: "I_SynE"
   g: "ge"
   E: "0 * mV"
   tau: "5 * ms"
-# ******************************************************************************* ##
 ```
 
 ```yaml
-# ******************************************************************************* ##
-# Model parameters for single exponential inhibitory synaptic current.
-#
-#
-# :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
-# :licence GPLv2, see LICENCE for more details
-#
-
 - class: "IonicCurrentSynExp"
   name: "I_SynI"
   g: "gi"
   E: "-80 * mV"
   tau: "10 * ms"
-# ******************************************************************************* ##
 ```
 
 The path to included currents can be either absolute or relative.
@@ -178,19 +146,25 @@ Parameter files follow standard [YAML](http://www.yaml.org/) syntax.
 
 ## Simulation Script
 1. Import the library in your python [BRIAN](http://briansimulator.org/) simulation script:
-    import brianmodel as bm
+```python
+import brianmodel as bm
+```
 
 2. Read the neuron model parameters file and create the string-formatted model equations from it:
-    # Read parameters from file
-    mod = bm.BrianModel(args.params)
-    mod.readParameterFile()
-    modeq = mod.getModelString()
+```python
+# Read parameters from file
+mod = bm.BrianModel(args.params)
+mod.readParameterFile()
+modeq = mod.getModelString()
+```
 
 3. This creates a dictionary of string-formatted model equations which you can access by key as standard in Pythong.
 
 4. You can now pass the equations to the [BRIAN](http://briansimulator.org/) Simulator. The command below creates a population of 100 neurons defined by the model strings contained in the list identified by "pyramidal"
-    eqPyram = Equations(modeq['pyramidal'])
-    Pyr = NeuronGroup(100, model=eqPyram, threshold=EmpiricalThreshold(threshold= -20 * mV, refractory=3 * ms), implicit=True, freeze=True)
+```python
+eqPyram = Equations(modeq['pyramidal'])
+Pyr = NeuronGroup(100, model=eqPyram, threshold=EmpiricalThreshold(threshold= -20 * mV, refractory=3 * ms), implicit=True, freeze=True)
+```
     
 
 
