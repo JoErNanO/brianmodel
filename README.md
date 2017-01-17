@@ -13,15 +13,15 @@ Implemented templates include:
 ### Ionic Currents
 Implemented ionic current libraries include:
 
-\- Traub and Miles Hodgkin-Huxley ($I_{Leak}, I_{K}, I_{Na}$) implementation \cite{Traub1991}
- M-Current ($I_M$) implementation described in \cite{Yamada1989}
-- Calcium current ($I_L$) implementation by Reuveni et al. \cite{Reuveni1993}
+- Traub and Miles Hodgkin-Huxley (I_<sub>Leak</sub>, I_<sub>K</sub>, I_<sub>Na</sub>) implementation \cite{Traub1991}
+- M-Current (I_M) implementation described in \cite{Yamada1989}
+- Calcium current (I_<sub>L</sub>) implementation by Reuveni et al. \cite{Reuveni1993}
 - Calcium pump mechanisms ($\frac{\mathrm{d}Ca}{\mathrm{d}t}$) implementation by Reuveni et al. \cite{Reuveni1993}
-- Calcium-activated non-selective current ($I_{CAN}$) implementation by Destexhe et al. \cite{Destexhe1994}
-- Wang and Busz\'{a}ki inhibitory Hodgkin-Huxley ($I_{Leak}, I_{K}, I_{Na}$) implementation \cite{Wang1996}
+- Calcium-activated non-selective current (I_<sub>CAN</sub>) implementation by Destexhe et al. \cite{Destexhe1994}
+- Wang and Buszáki inhibitory Hodgkin-Huxley (I_<sub>Leak</sub>, I_<sub>K</sub>, I_<sub>Na</sub>) implementation \cite{Wang1996}
 
 The current library is easily extensible by third-party users due to its hierarchical design.
-The template neurons and their currents are defined as [YAML](http://www.yaml.org/) files, which are conveniently parsed by a Python library developed by which acts as an interface to the [BRIAN](http://briansimulator.org/) simulator API's.
+The template neurons and their currents are defined as [YAML](http://www.yaml.org/) files, which are conveniently parsed by a Python library which acts as an interface to the [BRIAN](http://briansimulator.org/) simulator API's.
 
 # Installation
 1. Download the repository as it is in your home directory
@@ -36,7 +36,37 @@ The template neurons and their currents are defined as [YAML](http://www.yaml.or
 ## Model Parameter File
 Your model neuron is defined as a list of currents and their parameters.
 You will have to create a YAML parameter file containing all the neuron models used in your simulations.
-The sample file below (which can be found in includes/) defines two model neurons -- pyramidal and fast-spiking inhibitory -- and their associated currents and parameters:
+The sample file below (which can be found in includes/) defines two model neurons -- pyramidal and fast-spiking inhibitory -- and their associated currents and parameters.
+
+Typically, a neuron is defined by the area of the cell, the conductance across the cell membrane, and a list of transmembranal ionic currents.
+This takes the form:
+
+```yaml
+neurons:
+    model1:
+        area: "1e3 * umetre ** 2"
+        conductance: "1 * ufarad ** cm ** -2"
+
+        defined: 
+                - class: "IonicCurrentHHTraubLeak"
+                  name: "I_leak"
+                  g: "1e-5 * siemens * cm ** -2"
+                  E: "-70 * mV"
+                
+                - class: "IonicCurrentHHTraubK"
+                  name: "I_K"
+                  g: "5 * msiemens * cm ** -2"
+                  E: "-100 * mV"
+                  vT: "-55 * mV"
+
+
+```
+
+Here, "model1" is the identifier of the model neuron, and "defined" contains the list of ionic currents.
+The neuron of type "model1" contains a leak current and a sodium current.
+Each individual entry in the current list contains the name of the current class to be instantiated, the name used to identify the current in the [BRIAN](http://briansimulator.org/) script, and the parameters of that current equation (the conductance "g", the reversal potential "E", and the Traub constant, in the case of "IonicCurrentHHTraubK").
+
+
 
 ```yaml
 # ******************************************************************************* ##
@@ -121,7 +151,6 @@ The included currents are mono-exponential synaptic currents which are defined i
   g: "ge"
   E: "0 * mV"
   tau: "5 * ms"
-  #tau: "10 * ms"
 # ******************************************************************************* ##
 ```
 
@@ -139,7 +168,6 @@ The included currents are mono-exponential synaptic currents which are defined i
   g: "gi"
   E: "-80 * mV"
   tau: "10 * ms"
-  #tau: "5 * ms"
 # ******************************************************************************* ##
 ```
 
