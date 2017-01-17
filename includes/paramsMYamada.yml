@@ -1,0 +1,15 @@
+# ******************************************************************************* ##
+# Potassic M current implementation by Yamada
+#
+#
+# :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
+# :licence GPLv2, see LICENCE for more details
+#
+
+- class: "IonicCurrentMYamada"
+  name: "I_M"
+  g: "3e-5 * siemens * cm ** -2"
+  #g: "6e-5 * siemens * cm ** -2" # Strong M for 20Hz CAN
+  E: "-100 * mV"
+  tau: "1000 * ms"
+# ******************************************************************************* ##

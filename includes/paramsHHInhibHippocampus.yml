@@ -1,0 +1,37 @@
+# ******************************************************************************* ##
+# Model parameters for a hippocampal interneuron as defined by Motoharu in his
+# Neuron simulations.
+#
+#
+# :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
+# :licence GPLv2, see LICENCE for more details
+#
+
+neurons:
+    interneuron:
+        area: "14e3 * umetre ** 2" # Area taken from Neuron simulator code by Motoharu
+        conductance: "1 * ufarad * cm ** -2"
+
+        currents:
+            included: [paramsHHKopellInh.yml] #[paramsHHWangPyr.yml, paramsMYamada.yml, paramsCaLReuveni.yml]
+
+            defined:
+                ### Hodgkin-Huxley implementation by Wang
+                ###   - Parameters are for a fast-spiking inhibitory neuron
+                ###
+                #- class: "IonicCurrentHHWangLeak"
+                #  name: "I_leak"
+                #  g: "0.1e-3 * siemens * cm ** -2"
+                #  E: "-65 * mV"
+
+                #- class: "IonicCurrentHHWangK"
+                #  name: "I_K"
+                #  g: "9e-3 * siemens * cm ** -2"
+                #  E: "-90 * mV"
+
+                #- class: "IonicCurrentHHWangNa"
+                #  name: "I_Na"
+                #  g: "35e-3 * siemens * cm ** -2"
+                #  E: "55 * mV"
+
+# ******************************************************************************* ##

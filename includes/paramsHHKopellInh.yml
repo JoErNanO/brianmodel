@@ -1,0 +1,26 @@
+# ******************************************************************************* ##
+# Model parameters for a hippocampal interneuron as defined by Kopell et al. in [1].
+# 
+# References:
+#    - [1] Kopell NJ, Boergers C, Pervouchine D, Malerba P, Tort A: Gamma and theta rhythms in biophysical models of hippocampal circuits. In Hippocampal Microcircuits A Computational Modeler’s Resource Book. Edited by Cutsuridis V, Graham B, Cobb S, Vida I. New York, NY: Springer New York; 2010:423–457.
+#
+# :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
+# :licence GPLv2, see LICENCE for more details
+# ******************************************************************************* ##
+
+- class: "IonicCurrentHHWangLeak"
+  name: "I_leak"
+  g: "0.1e-3 * siemens * cm ** -2"
+  E: "-65 * mV"
+
+- class: "IonicCurrentHHWangK"
+  name: "I_K"
+  g: "9e-3 * siemens * cm ** -2"
+  E: "-90 * mV"
+
+- class: "IonicCurrentHHWangNa"
+  name: "I_Na"
+  g: "35e-3 * siemens * cm ** -2"
+  E: "55 * mV"
+
+# ******************************************************************************* ##

@@ -1,0 +1,32 @@
+# ******************************************************************************* ##
+# Model parameters for two interconnected excitatory and inhibitory neural populations: PING.
+#
+#   1. A population of pyramidal interneurons with the following currents:
+#       leak, Na, K, M, SynE, SynI
+#   2. A population of inhibitory interneurons with the following currents:
+#       leak, Na, K, SynE, SynI
+#
+# :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
+# :licence GPLv2, see LICENCE for more details
+#
+
+neurons:
+    pyramidal:
+        area: "29e3 * umetre ** 2"
+        conductance: "1 * ufarad * cm ** -2"
+
+        currents:
+            included: [paramsHHTraubPyr.yml, paramsMYamada.yml, paramsSynExpExc.yml, paramsSynExpInh.yml]
+
+            defined:
+    
+    interneuron:
+        area: "14e3 * umetre ** 2"
+        conductance: "1 * ufarad * cm ** -2"
+
+        currents:
+            included: [paramsHHKopellInh.yml, paramsSynExpExc.yml, paramsSynExpInh.yml]
+
+            defined:
+## ******************************************************************************* ##
+## ******************************************************************************* ##

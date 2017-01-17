@@ -1,0 +1,18 @@
+## ******************************************************************************* ##
+## Low-threshold Calcoum current implementation by Reuveni
+##
+##    References:
+##        - http://en.wikipedia.org/wiki/L-type_calcium_channel
+##        - Reuveni I; Friedman A; Amitai Y; Gutnick MJ. Stepwise repolarization from Ca2+ plateaus in neocortical pyramidal cells: evidence for nonhomogeneous distribution of HVA Ca2+ channels in dendrites. Journal of Neuroscience, 1993 Nov, 13(11):4609-21.
+##
+#
+- class: "IonicCurrentCaLReuveni"
+  name: "I_Ca"
+  g: "1e-4 * siemens * cm ** -2"
+  E: "120 * mV"
+  tau: "200 * ms"
+  caInf: "2.4e-4 * mole * metre**-3"
+  kUnit: "1e4" # Unit conversion constant
+  kFaraday: "96489 * coulomb * mole ** -1" # Faraday constant
+  depth: "1 * umetre" # Shell depth
+## ******************************************************************************* ##

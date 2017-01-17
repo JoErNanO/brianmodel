@@ -1,0 +1,15 @@
+# ******************************************************************************* ##
+# Model parameters for single exponential inhibitory synaptic current.
+#
+#
+# :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
+# :licence GPLv2, see LICENCE for more details
+#
+
+- class: "IonicCurrentSynExp"
+  name: "I_SynI"
+  g: "gi"
+  E: "-80 * mV"
+  tau: "10 * ms"
+  #tau: "5 * ms"
+# ******************************************************************************* ##

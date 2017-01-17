@@ -1,0 +1,47 @@
+# ******************************************************************************* ##
+# Model parameters for a population of CAN-equipped pyramidal neurons with the following currents:
+#       leak, Na, K, M, CaL, CAN, SynE, SynI
+#
+# :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
+# :licence GPLv2, see LICENCE for more details
+#
+
+#simulation:
+
+neurons:
+    pyramidal:
+        area: "29e3 * umetre ** 2"
+        conductance: "1 * ufarad * cm ** -2"
+
+        currents:
+            included: [paramsHHTraubPyr.yml, paramsCaLReuveni.yml, paramsSynExpExc.yml, paramsSynExpInh.yml]
+
+            defined:
+                - class: "IonicCurrentCANDestexhe"
+                  name: "I_CAN"
+                  #g: "1.5e-5 * siemens * cm ** -2" # 6Hz persistent (cell)
+                  #g: "2.25e-5 * siemens * cm ** -2" # 14Hz persistent (cell)
+                  #g: "2.9e-5 * siemens * cm ** -2" # 20Hz persistent (cell)
+                  g: "gCAN" # Change gCAN value in the simulation - eg. add heterogeneity
+                  #g: "3.5e-5 * siemens * cm ** -2" # 20Hz persistent
+                  #g: "1.75e-2 * msiemens * cm ** -2"
+                  #g: "8.67e-3 * msiemens * cm ** -2"
+                  #g: "0 * msiemens * cm ** -2"
+                  E: "-20 * mV"
+                  beta: "0.0002 * ms ** -1"
+                  cac: "5e-4 * mole * metre ** -3" # CAN channel half-open calcium concentration
+                  temp: "36." # Temperatures in Celsius
+
+                - class: "IonicCurrentMYamada"
+                  name: "I_M"
+                  #g: "3e-5 * siemens * cm ** -2" # 6Hz persistent
+                  #g: "4.5e-5 * siemens * cm ** -2" # 14Hz persistent
+                  #g: "4.5e-5 * siemens * cm ** -2" # 14Hz persistent (hetero +- 0.25e-5)
+                  #g: "6e-5 * siemens * cm ** -2" # 20Hz persistent
+                  #g: "9e-5 * siemens * cm ** -2" # 20Hz persistent
+                  g: "gM" # Change gM value in the simulations
+                  E: "-100 * mV"
+                  #tau: "1000 * ms"
+                  tau: "tauM" # Change tauM value in the simulations
+
+## ******************************************************************************* ##

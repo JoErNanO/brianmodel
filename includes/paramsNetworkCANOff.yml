@@ -1,0 +1,39 @@
+# ******************************************************************************* ##
+# Pospichil 2008 Model Parameters
+#
+# This file contains the Hodgkin-Huxley neuron model by Pospichil et al. presented in
+# Pospischil et al. (2008). Minimal Hodgkin-Huxley type models for different classes of
+# cortical and thalamic neurons. Biological Cybernetics, 99(4-5), 427–41.
+# doi:10.1007/s00422-008-0263-8
+#
+# :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
+# :licence GPLv2, see LICENCE for more details
+#
+
+#simulation:
+
+neurons:
+    pyramidal:
+        area: "29e3 * umetre ** 2"
+        conductance: "1 * ufarad * cm ** -2"
+
+        currents:
+            #included: [paramsHHTraubPyr.yml, paramsMYamada.yml, paramsCaLReuveni.yml, paramsSynExpExc.yml, paramsSynExpInh.yml]
+            included: [paramsHHTraubPyr.yml, paramsCaLReuveni.yml, paramsSynExpExc.yml, paramsSynExpInh.yml]
+
+            defined:
+                - class: "IonicCurrentCANDestexhe"
+                  name: "I_CAN"
+                  g: "0 * msiemens * cm ** -2"
+                  E: "-20 * mV"
+                  beta: "0.0002 * ms ** -1"
+                  cac: "5e-4 * mole * metre ** -3" # CAN channel half-open calcium concentration
+                  temp: "36." # Temperatures in Celsius
+
+                - class: "IonicCurrentMYamada"
+                  name: "I_M"
+                  #g: "3e-5 * siemens * cm ** -2"
+                  g: "6e-5 * siemens * cm ** -2"
+                  E: "-100 * mV"
+                  tau: "1000 * ms"
+# ******************************************************************************* ##

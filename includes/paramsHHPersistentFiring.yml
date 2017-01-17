@@ -1,0 +1,30 @@
+## ******************************************************************************* ##
+## Giovannini 2017 Model Parameters
+##
+## This file contains the persistent firing Hodgkin-Huxley neuron model by 
+## Giovannini et al. presented in Giovannini, F., Knauer, B., Yoshida, M., & Buhry, L. 
+## (2017). The CAN-In neural network: A mathematical model for theta oscillations and 
+## memory maintenance in the hippocampus. Hippocampus. https://doi.org/10.1002/hipo.22704
+##
+## :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
+## :licence GPLv7, see LICENCE for more details
+##
+
+neurons:
+    pyramidal:
+        area: "29e3 * umetre ** 2"
+        conductance: "1 * ufarad * cm ** -2"
+        
+        currents:
+            included: [paramsHHTraubPyr.yml, paramsMYamada.yml, paramsCaLReuveni.yml]
+
+            defined:
+                - class: "IonicCurrentCANDestexhe"
+                  name: "I_CAN"
+                  #g: "1.5e-2 * msiemens * cm ** -2" # 6Hz persistent
+                  g: "3e-2 * msiemens * cm ** -2" # 20Hz persistent
+                  E: "-20 * mV"
+                  beta: "0.0002 * ms ** -1"
+                  cac: "5e-4 * mole * metre ** -3" # CAN channel half-open calcium concentration
+                  temp: "36." # Temperatures in Celsius
+## ******************************************************************************* ##

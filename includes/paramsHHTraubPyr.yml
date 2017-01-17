@@ -1,0 +1,26 @@
+## ******************************************************************************* ##
+## Hodgkin-Huxley implementation by Traub
+##   - Parameters are for a regular-spiking pyramidal neuron
+##
+##
+## :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
+## :licence GPLv2, see LICENCE for more details
+##
+
+- class: "IonicCurrentHHTraubLeak"
+  name: "I_leak"
+  g: "1e-5 * siemens * cm ** -2"
+  E: "-70 * mV"
+
+- class: "IonicCurrentHHTraubK"
+  name: "I_K"
+  g: "5 * msiemens * cm ** -2"
+  E: "-100 * mV"
+  vT: "-55 * mV"
+
+- class: "IonicCurrentHHTraubNa"
+  name: "I_Na"
+  g: "50 * msiemens * cm ** -2"
+  E: "50 * mV"
+  vT: "-55 * mV"
+## ******************************************************************************* ##

@@ -1,0 +1,53 @@
+# ******************************************************************************* ##
+# Model parameters for three interconnected neural populations: CPING.
+#
+#   1. A population of CAN-equipped pyramidal neurons with the following currents:
+#       leak, Na, K, M, CaL, CAN, SynE, SynI
+#   2. A population of pyramidal interneurons with the following currents:
+#       leak, Na, K, M, SynE, SynI
+#   3. A population of inhibitory interneurons with the following currents:
+#       leak, Na, K, SynE, SynI
+#
+#
+# :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
+# :licence GPLv2, see LICENCE for more details
+#
+
+neurons:
+    pyramidalCAN:
+        area: "29e3 * umetre ** 2"
+        conductance: "1 * ufarad * cm ** -2"
+
+        currents:
+            included: [paramsHHTraubPyr.yml, paramsMYamada.yml, paramsCaLReuveni.yml, paramsSynExpExc.yml, paramsSynExpInh.yml]
+
+            defined:
+                - class: "IonicCurrentCANDestexhe"
+                  name: "I_CAN"
+                  g: "1.5e-5 * siemens * cm ** -2"
+                  #g: "1.75e-2 * msiemens * cm ** -2"
+                  #g: "8.67e-3 * msiemens * cm ** -2"
+                  #g: "0 * msiemens * cm ** -2"
+                  E: "-20 * mV"
+                  beta: "0.0002 * ms ** -1"
+                  cac: "5e-4 * mole * metre ** -3" # CAN channel half-open calcium concentration
+                  temp: "36." # Temperatures in Celsius
+
+    pyramidal:
+        area: "29e3 * umetre ** 2"
+        conductance: "1 * ufarad * cm ** -2"
+
+        currents:
+            included: [paramsHHTraubPyr.yml, paramsMYamada.yml, paramsSynExpExc.yml, paramsSynExpInh.yml]
+
+            defined:
+    
+    interneuron:
+        area: "14e3 * umetre ** 2"
+        conductance: "1 * ufarad * cm ** -2"
+
+        currents:
+            included: [paramsHHKopellInh.yml, paramsSynExpExc.yml, paramsSynExpInh.yml] #[paramsHHTraubPyr.yml, paramsMYamada.yml, paramsCaLReuveni.yml]
+
+            defined:
+# ******************************************************************************* ##
