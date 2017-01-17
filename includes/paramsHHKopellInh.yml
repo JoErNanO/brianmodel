@@ -5,7 +5,7 @@
 #    - [1] Kopell NJ, Boergers C, Pervouchine D, Malerba P, Tort A: Gamma and theta rhythms in biophysical models of hippocampal circuits. In Hippocampal Microcircuits A Computational Modeler’s Resource Book. Edited by Cutsuridis V, Graham B, Cobb S, Vida I. New York, NY: Springer New York; 2010:423–457.
 #
 # :copyright 2015 Francesco Giovannini, Neurosys - INRIA CR Nancy - Grand Est
-# :licence GPLv2, see LICENCE for more details
+# :licence GPLv3, see LICENCE for more details
 # ******************************************************************************* ##
 
 - class: "IonicCurrentHHWangLeak"
