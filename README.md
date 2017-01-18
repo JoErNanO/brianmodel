@@ -185,6 +185,7 @@ Parameter files follow standard [YAML](http://www.yaml.org/) syntax.
     ```python
     # Read parameters from file
     filename = "./params.yml"
+
     # Create the BrianModel object with the given parameter file
     mod = bm.BrianModel(filename)
     mod.readParameterFile()
