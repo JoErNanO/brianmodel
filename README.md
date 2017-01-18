@@ -1,6 +1,6 @@
 # BrianModel
-Library of neuron models and ionic currents for the [BRIAN](http://briansimulator.org/) simulator.
-The purpose of these is to speed up simulation set-up time and reduce code duplication across simulation scripts.
+BrianModel is a library of neuron models and ionic currents for the [BRIAN](http://briansimulator.org/) simulator.
+The purpose of BrianModel is to speed up simulation set-up and reduce code duplication across simulation scripts.
 
 ## Spiking Neuron Templates
 Template neurons are defined by the ionic currents that flow through their membrane.
