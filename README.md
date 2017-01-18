@@ -177,27 +177,27 @@ Parameter files follow standard [YAML](http://www.yaml.org/) syntax.
 
 ## Simulation Script
 1. Import the library in your python [BRIAN](http://briansimulator.org/) simulation script:
-```python
-import brianmodel as bm
-```
+    ```python
+    import brianmodel as bm
+    ```
 
 2. Read the neuron model parameters file and create the string-formatted model equations from it:
-```python
-# Read parameters from file
-filename = "./params.yml"
-mod = bm.BrianModel(filename)
-mod.readParameterFile()
-modeq = mod.getModelString()
-```
+    ```python
+    # Read parameters from file
+    filename = "./params.yml"
+    mod = bm.BrianModel(filename)
+    mod.readParameterFile()
+    modeq = mod.getModelString()
+    ```
 
 3. This creates a dictionary of string-formatted model equations which you can access by key as standard in Pythong.
 
 4. You can now pass the equations to the [BRIAN](http://briansimulator.org/) Simulator. The command below creates a population of 100 neurons defined by the model strings contained in the list identified by "pyramidal"
-```python
-eqPyram = Equations(modeq['pyramidal'])
-Pyr = NeuronGroup(100, model=eqPyram, threshold=EmpiricalThreshold(threshold= -20 * mV, refractory=3 * ms), implicit=True, freeze=True)
-```
-    
+    ```python
+    eqPyram = Equations(modeq['pyramidal'])
+    Pyr = NeuronGroup(100, model=eqPyram, threshold=EmpiricalThreshold(threshold= -20 * mV, refractory=3 * ms), implicit=True, freeze=True)
+    ```
+5. What will follow is your standard BRIAN code.    
 
 
 ## References
