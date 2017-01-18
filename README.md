@@ -185,8 +185,11 @@ Parameter files follow standard [YAML](http://www.yaml.org/) syntax.
     ```python
     # Read parameters from file
     filename = "./params.yml"
+    # Create the BrianModel object with the given parameter file
     mod = bm.BrianModel(filename)
     mod.readParameterFile()
+
+    # Get the generated model string
     modeq = mod.getModelString()
     ```
 
@@ -194,9 +197,13 @@ Parameter files follow standard [YAML](http://www.yaml.org/) syntax.
 
 4. You can now pass the equations to the [BRIAN](http://briansimulator.org/) Simulator. The command below creates a population of 100 neurons defined by the model strings contained in the list identified by "pyramidal"
     ```python
+    # Make BRIAN parse equation string
     eqPyram = Equations(modeq['pyramidal'])
+
+    # Create a population of 100 neurons with using the equations
     Pyr = NeuronGroup(100, model=eqPyram, threshold=EmpiricalThreshold(threshold= -20 * mV, refractory=3 * ms), implicit=True, freeze=True)
     ```
+
 5. What will follow is your standard BRIAN code.    
 
 
